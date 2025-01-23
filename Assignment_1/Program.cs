@@ -275,19 +275,26 @@ namespace Assignment03OOP
             Console.WriteLine("Enter the user type (Regular, Premium, or Guest):");
             string userType = Console.ReadLine();
 
-            if (userType == "Regular")
+            while (user == null)
             {
-                user = new RegularUser();
+                switch (userType.ToLower())
+                {
+                    case "regular":
+                        user = new RegularUser();
+                        break;
+                    case "premium":
+                        user = new PremiumUser();
+                        break;
+                    case "guest":
+                        user = new GuestUser();
+                        break;
+                    default:
+                        Console.WriteLine("Invalid user type. Please enter Regular, Premium, or Guest:");
+                        userType = Console.ReadLine();
+                        break;
+                }
             }
-            else if (userType == "Premium")
-            {
-                user = new PremiumUser();
-            }
-            else if (userType == "Guest")
-            {
-                user = new GuestUser();
-            }
-
+            
             if (user != null)
             {
                 discount = user.GetDiscount();
@@ -305,10 +312,7 @@ namespace Assignment03OOP
                 Console.WriteLine($"Final Price: {finalPrice:C}");
             }
 
-            else
-            {
-                Console.WriteLine("Invalid user type.");
-            }
+           
             #endregion
 
         }
